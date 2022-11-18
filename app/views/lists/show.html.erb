@@ -2,16 +2,18 @@
   <h1><%= @list.name %></h1>
 
   <% @list.movies.each do |movie| %>
-    <% bookmark = Bookmark.find_by(list: @list, movie: movie)  %>
-    <h3><%= movie.title %></h3>
-    <p><%= movie.overview %></p>
-    <img src=<%=movie.poster_url %>>
-    <h4><%= movie.rating %></h4>
-    <%= bookmark.comment %>
-    <%= link_to "Delete",
-        bookmark_path(bookmark),
-        data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
-      %>
+    <div class="card">
+      <% bookmark = Bookmark.find_by(list: @list, movie: movie)  %>
+      <h3><%= movie.title %></h3>
+      <p><%= movie.overview %></p>
+      <img src=<%=movie.poster_url %> class="img_w">
+      <h4><%= movie.rating %></h4>
+      <%= bookmark.comment %>
+      <%= link_to "Delete",
+          bookmark_path(bookmark),
+          data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+        %>
+    </div>
   <% end %>
 
   <div class="mt-3">
